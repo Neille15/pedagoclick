@@ -2,12 +2,13 @@ import "dotenv/config";
 import express from "express";
 import healthRoutes from "./routes/healthRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
+import cors from "cors";
 
 const app = express();
 const port = Number(process.env.PORT ?? 5000);
 
+app.use(cors({ origin: "http://localhost:5173" }));
 app.use("/api", healthRoutes);
-
 app.use("/api", studentRoutes);
 
 app.use((req, res) => {
